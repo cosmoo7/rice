@@ -1,0 +1,23 @@
+#!/bin/bash
+# check if the file exist
+if [ ! -f "$HOME/.local/share/cosmo/rcs" ]; then
+    printf "Error: Config file not found.\n" >&2
+    exit 1
+fi
+
+rc=$(dmenu -p "Choose config:" -l 25 <<< "$(< ~/.local/share/cosmo/rcs)")
+
+# check if a file path was selected
+if [ -z "$rc" ]; then
+    printf "Error: No config path selected.\n" >&2
+    exit 1
+fi
+
+# check if the selected file path is a valid 
+if [ ! -f "$HOME/$rc" ] && [ ! -d "$HOME/$rc" ]; then
+    printf "Error: Config path not found.\n" >&2
+    exit 1
+fi
+
+st -e nvim "$HOME/$rc"
+

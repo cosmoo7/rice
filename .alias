@@ -1,0 +1,15 @@
+alias S="yay -Sy"
+alias Q="yay -Q"
+alias R="yay -R"
+alias alacritty='alacritty --config-file ~/.config/alacritty/alacritty.toml'
+alias ste="st -f RobotoMono -g 64 -T st"
+alias playlist='mpv ~/Music/Fav-Music --no-audio-display'
+alias copy='xclip -selection clipboard'
+alias v='$EDITOR'
+alias f='$FILEMANAGER'
+alias clone='cd $HOME/.cache/clone && git clone'
+alias vim='nvim'
+alias ls='ls -lAhs --color=auto'
+alias s=sudo
+alias sctl="sudo systemctl" 
+alias lv="live-server  --no-browser"

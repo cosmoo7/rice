@@ -1,0 +1,26 @@
+#!/bin/bash
+set -e
+# Check if an input argument was provided
+if [ $# -eq 0 ]
+then
+    echo "Error: No input argument provided."
+    exit 1
+fi
+
+# Get the input argument
+filename=$1
+# Create the file in ~/.local/bin
+touch ~/.local/bin/$filename
+shell=$(dmenu -l 5 < ~/.local/share/cosmo/shells)
+
+# Automatically set a shebang
+echo "$shell" > ~/.local/bin/$filename
+
+# Set the executable permission on the file
+chmod +x ~/.local/bin/$filename
+
+# echo "File '$filename' >> '~/.local/bin' >> chmod +x '$filename'"
+echo -e "'$filename' \e[36m>>\e[0m '~/.local/bin' \e[36m>>\e[0m chmod +x $filename'"
+sleep 1
+$TERM -e vim ~/.local/bin/$filename & 2> /dev/null
+exit

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Extract the currently selected text
+pacman -Q xclip > /dev/null || exit
+selected_text=$(xclip -o)
+bookmarks="$HOME/.config/bookmarks"
+# Check if any text is selected
+if [ -z "$selected_text" ]; then
+  # No text is selected, print an error message and exit
+  echo "No text is selected!" >&2
+  exit 1
+fi
+
+# Write the selected text to the specified file
+echo "$selected_text" >> "$bookmarks"
+

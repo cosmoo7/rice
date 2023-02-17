@@ -1,0 +1,6 @@
+#!/bin/sh
+set -e
+str=$(dmenu -p Search: < /dev/null)
+ddgr --np -x --json $str > ~/.cache/search.tmp
+urls=$(jq -r '.[].url' ~/.cache/search.tmp)
+firefox $(echo $urls | tr ' ' '\n' | dmenu -p Results: -l 15)

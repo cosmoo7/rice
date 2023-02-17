@@ -1,0 +1,16 @@
+#!/bin/bash
+if pacman -Q surf &>> /dev/null; then
+	echo "[✓]surf installed"
+else
+	echo "[☓]surf not installed. Aborting!"
+	exit 1
+fi
+mkdir -p $HOME/.cache/bus-timetable
+curl https://rozklad.mzk-torun.pl/panel.html -s | grep -o "Linia\S*.html" | awk '{gsub(/.html/, ""); print}' > $HOME/.cache/bus-timetable/stations
+station=$(dmenu -l 10 < $HOME/.cache/bus-timetable/stations)
+echo $station
+curl https://rozklad.mzk-torun.pl/$station.html | grep -o "<a href='[0-9]*/[0-9]*/[0-9]*\.html'[^<]*<h3>.*</h3></a>" |
+sed -n 's/^<a href='\''\([0-9]*\/[0-9]*\/[0-9]*\.html\)'\''[^<]*<h3>\(.*\)<\/h3><\/a>$/\1 \2/p' > $HOME/.cache/bus-timetable/dir
+dir=$(awk '{print $2}' $HOME/.cache/bus-timetable/dir | dmenu -l 10)
+url=https://rozklad.mzk-torun.pl/$(grep $dir $HOME/.cache/bus-timetable/dir | awk '{print $1}')
+surf $url

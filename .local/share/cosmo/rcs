@@ -1,0 +1,7 @@
+.zshrc
+.config/nvim/init.vim
+.config/i3/config
+.local/bin
+.local/share/cosmo/rcs
+.config/polybar/config.ini
+.config/lf/lfrc

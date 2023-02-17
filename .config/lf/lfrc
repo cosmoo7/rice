@@ -1,0 +1,6 @@
+colorscheme slate
+set preview-command="imgcat %s"
+set open-command="xdg-open %s"
+set filedefault=$EDITOR
+set dotfiles
+set show-hidden
